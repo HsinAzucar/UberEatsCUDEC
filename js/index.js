@@ -1,3 +1,6 @@
+btnAgregarPlatilllo = document.getElementById('btnAgregarPlatillo');
+
+
 document.addEventListener('DOMContentLoaded', function() {
   // nav menu
   const menus = document.querySelectorAll('.side-menu');
@@ -6,3 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const forms = document.querySelectorAll('.side-form');
   M.Sidenav.init(forms, {edge: 'left'});
 });
+
+btnAgregarPlatilllo.addEventListener ('click',function(){
+   alert('Platillo Agregado')
+}); 
+
+
