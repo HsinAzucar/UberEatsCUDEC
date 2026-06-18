@@ -11,19 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
   M.Sidenav.init(forms, {edge: 'left'});
 });
 
-btnAgregarPlatilllo.addEventListener ('click',function(){
-   alert('Platillo Agregado')
-}); 
+
 
 function mostrarPlatillo (platillo, id){
- contenido += `<div class="card-panel recipe white row" data-id="${id}">
+ contenido += `<div class="card-panel recipe white row" id="${id}">
  <div class="recipe-details">
     <div class="recipe-title">
  ${platillo.Nombre}
  </div>
  <div class="recipe-ingredients">
  ${platillo.ingredientes}
- <div class="recipe-precio" style="color: green;">
+ <div class="recipe-price" style="color: green;">
   Precio $${platillo.precio}
  </div>
  </div>
@@ -36,4 +34,10 @@ function mostrarPlatillo (platillo, id){
 document.querySelector ('.recipes').innerHTML = contenido;
 } 
 
+function actualizarPlatillo (platillo, id){
+   let tarjeta = document.getElementById(`${id}`);
+   tarjeta.querySelector(".recipe-title").innerHTML= platillo.nombre;
+   tarjeta.querySelector(".recipe-ingredients").innerHTML= platillo.ingredientes;
+   tarjeta.querySelector(".recipe-price").innerHTML= platillo.precio;
+}
 
