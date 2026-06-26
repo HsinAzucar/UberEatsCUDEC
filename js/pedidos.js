@@ -1,63 +1,25 @@
-let contenidoLista = '';
-
-function agregarALista(Platillo, id){
-contenidoLista = `<option value='${id}'>
-${platillo.Nombre}
-</option>`;
-document.getElementById('listaPlatillos').innerHTML =
-  contenidoLista;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
-
+  // nav menu
   const menus = document.querySelectorAll('.side-menu');
-  M.Sidenav.init(menus, { edge: 'right' });
-
-  const forms = document.querySelectorAll('.side-form');
-  M.Sidenav.init(forms, { edge: 'left' });
-
-  const selects = document.querySelectorAll('select');
-  M.FormSelect.init(selects);
-
+  M.Sidenav.init(menus, {edge: 'right'});
 });
 
-const formPedido = document.getElementById("formPedido");
-
-formPedido.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const pedido = {
-    platillo: document.getElementById("platilloPedido").value,
-    direccion: document.getElementById("direccion").value
-  };
-
-  console.log(pedido);
-
-  alert("Pedido guardado");
+let contenidoLista =" ";
+ 
+db.collection("platillos").onSnapshot((datos) => {
+    datos.docChanges().forEach ((registro) =>{
+        if (registro.type ==="added"){
+            agregarALista(registro.doc.data(),registro.doc.id)
+        }
+    });
+    var elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems)
 });
-
-document.getElementById("btnCancelar")
-.addEventListener("click", () => {
-
-  document.getElementById("direccion").value = "";
-  document.getElementById("platilloPedido").selectedIndex = 0;
-
-  M.FormSelect.init(document.querySelectorAll('select'));
-
-  const sidenav = M.Sidenav.getInstance(
-    document.getElementById("side-pedido")
-  );
-
-  sidenav.close();
-});
+ 
+function agregarALista(platillo,id){
+    contenidoLista+= `<option value =' ${id}'>
+    ${platillo.Nombre}
+    </option>`;
+    document.getElementById("ListaPlatillos").innerHTML =contenidoLista;
+}
+M.AutoInit();

@@ -1,5 +1,5 @@
 let contenido ='';
-btnAgregarPlatilllo = document.getElementById('btnAgregarPlatillo');
+btnAgregarPlatillo = document.getElementById('btnAgregarPlatillo');
 
 
 document.addEventListener('DOMContentLoaded', function() {
