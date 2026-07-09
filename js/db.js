@@ -7,6 +7,9 @@ db.collection("platillos").onSnapshot((datos)=> {
     actualizarPlatillo(registro.doc.data(),registro.doc.id);
     
    }
+   if (registro.type === "removed") {
+    document.getElementById(registro.doc.id).remove();
+}
 
     
  });
@@ -33,3 +36,15 @@ const platilloNuevo = {
    formularioAgregar.price.value ="";
    alert("Platillo agregado")
 });
+
+function eliminarPlatillo(id){
+
+    db.collection("platillos").doc(id).delete()
+    .then(() => {
+        console.log("Platillo eliminado");
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+}

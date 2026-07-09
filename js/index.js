@@ -3,13 +3,29 @@ btnAgregarPlatillo = document.getElementById('btnAgregarPlatillo');
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  // nav menu
+  
   const menus = document.querySelectorAll('.side-menu');
   M.Sidenav.init(menus, {edge: 'right'});
-  // add recipe form
+  
   const forms = document.querySelectorAll('.side-form');
   M.Sidenav.init(forms, {edge: 'left'});
+
+
 });
+
+document.querySelector(".recipes").addEventListener("click", (e)=>{
+
+    if(e.target.classList.contains("material-icons")){
+
+        const id = e.target.dataset.id;
+
+        eliminarPlatillo(id);
+
+    }
+
+});
+
+
 
 
 

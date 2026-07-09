@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // nav menu
+  
   const menus = document.querySelectorAll('.side-menu');
   M.Sidenav.init(menus, {edge: 'right'});
 });
@@ -65,19 +65,29 @@ document.getElementById("btnUbicacion").addEventListener("click", function(){
 });
 
 function exito(posicion){
-    let latitud = posicion.coords.latitud;
-    let longitud = posicion.coords.longitud;
-    fetch (`https://nominatim.openstreetmap.org/reverse?lat=${latitud}&lon=${longitud}&format=json`,
-        headers:{
-        ' User-Agent': 'UberEatsLeoCUDEC (slerrckk@gmail.com)'
+      let latitud = posicion.coords.latitude;
+      let longitud = posicion.coords.longitude;
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitud}&lon=${longitud}&format=json`, {
+        headers: {
+            'User-Agent': 'UberEatsLeoCUDEC (slerckk@gmail.com)'
         }
-    )
-
+    })
+    
+        .then(respuesta => respuesta.json())
+        .then(data => {
+            let ciudad = data.address.city;
+            let pais = data.address.country;
+            document.getElementById("direccion").value = `${ciudad}, ${pais}`;
+          })
+        
 
 }
-function error(){
-    alert("no se puede ")
+function error(error){
+    alert("error al obtener la ubicacion")
+    console.log(error);
 }
+
+
 
 
 
