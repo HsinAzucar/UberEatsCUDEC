@@ -108,7 +108,7 @@ btnTomarFoto.addEventListener("click", ()=>{
         canvas.height = height;
         contexto.drawImage(video, 0, 0, width, height);
         const fotoFinal = canvas.toDataURL("image/png");
-        foto.setAttribute("src", fotoFinal);
+        
 
         // detener cámara y ocultar video
         if(streamActivo){
