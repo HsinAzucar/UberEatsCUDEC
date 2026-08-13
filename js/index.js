@@ -63,27 +63,23 @@ let height = 0;
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const foto = document.getElementById('foto');
-const bnFoto = document.getElementById('bnFoto');
-const btnTomarFoto = document.getElementById('tomarFoto')
+const btnFoto = document.getElementById('btnFoto');
+const btnTomarFoto = document.getElementById('tomarFoto');
 
 btnFoto.addEventListener("click", function(){
     navigator.mediaDevices
     .getUserMedia({
-        video: {
-            facingMode: {
-                ideal: "environment"
-            }
-        },
+        video: { facingMode: "environment" },
         audio: false
     })
     .then((stream)=> {
-        VideoFrame.srcObject = stream;
+        video.srcObject = stream; // aquí debe ser video, no VideoFrame
         video.play();
     })
     .catch((error) => {
         console.log(error);
-    })
-})
+    });
+});
 
 video.addEventListener("canplay", ()=>{
     if (!streaming){
@@ -92,25 +88,23 @@ video.addEventListener("canplay", ()=>{
         video.setAttribute("height", height);
         streaming = true; 
     }
-})
+});
 
-btnFoto.addEventListener ("click", tomarFoto);
+btnTomarFoto.addEventListener("click", tomarFoto);
 
 function tomarFoto(){
-    const contexto = Canvas.getContext("2d");
+    const contexto = canvas.getContext("2d");
     if (width && height) {
-        Canvas.width = width;
+        canvas.width = width;
         canvas.height = height;
         contexto.drawImage(video, 0, 0, width, height);
+        const fotoFinal = canvas.toDataURL("image/png"); // aquí generas la imagen
         foto.setAttribute("src", fotoFinal);
-        document.getElementById("foto").value = fotoFinal;
-    }
-    else{
-    limpiarFoto();
+    } else {
+        limpiarFoto();
     }
 }
 
 function limpiarFoto(){
-    foto.src ="";
+    foto.src = "";
 }
-
